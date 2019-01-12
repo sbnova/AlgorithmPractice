@@ -44,6 +44,9 @@ public class Question05Activity extends BaseActivity {
 
 //   ?S ?B 인지 체크 하는 메소드
     void checkUserNumber(){
+//        시도 1회 증가
+        userTryCount++;
+
 //        세자리가 아닐경우 다시 입력하게 Toast
         if(numInputEdt.length() !=3){
             Toast.makeText(mContext, "3자리 숫자를 입력하세요", Toast.LENGTH_SHORT).show();
@@ -81,7 +84,7 @@ public class Question05Activity extends BaseActivity {
             for(int j=0; j<3; j++){
 
 //                숫자가 같은 것을 발견
-                if (userInputIntArray[i] == questionIntArray[i]){
+                if (userInputIntArray[i] == questionIntArray[j]){
 
                     if(i == j){
 //                        위치도 같다! strike 갯수 증가
@@ -96,7 +99,7 @@ public class Question05Activity extends BaseActivity {
         }
 
 //        임시로 토스트에 S/B 출력
-        String temp = String.format("%d S %d B 입니다",strikeCount, ballCount);
+        String temp = String.format("%d S %d B 입니다", strikeCount, ballCount);
         Toast.makeText(mContext, temp, Toast.LENGTH_SHORT).show();
 
         if(strikeCount == 3){
