@@ -72,7 +72,7 @@ public class Question05Activity extends BaseActivity {
 //        입력한 값을 채팅처럼 메세지로 출력. => chatList에 추가.
         Chat inputNumChat = new Chat("user",inputStr);
         chatList.add(inputNumChat);
-//        notifyDataChartset 이 필요함.
+//         notifyDatasetChanged 필요함!
 
 //        배열에 각 자리의 숫자를 집어넣기
 //        먼저, String -> 숫자로 변겅. "512" -> 512
