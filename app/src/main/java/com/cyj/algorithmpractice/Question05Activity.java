@@ -12,6 +12,9 @@ public class Question05Activity extends BaseActivity {
 //    컴퓨터가 출제한 문제 (3자리 숫자가 저장)
     int[] questionIntArray = new int[3];
 
+//    사용자가 몇번이나 정답을 시도했느닞
+    int userTryCount = 0;
+
     private android.widget.ListView chatListView;
     private android.widget.EditText numInputEdt;
     private android.widget.Button okBtn;
@@ -95,6 +98,11 @@ public class Question05Activity extends BaseActivity {
 //        임시로 토스트에 S/B 출력
         String temp = String.format("%d S %d B 입니다",strikeCount, ballCount);
         Toast.makeText(mContext, temp, Toast.LENGTH_SHORT).show();
+
+        if(strikeCount == 3){
+            Toast.makeText(mContext, "정답입니다!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, userTryCount +"번 만에 맞췄습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
