@@ -1,9 +1,11 @@
 package com.cyj.algorithmpractice;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class Question05Activity extends BaseActivity {
 
@@ -28,6 +30,71 @@ public class Question05Activity extends BaseActivity {
     @Override
     public void setupEvents() {
 
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkUserNumber();
+            }
+        });
+
+    }
+
+//   ?S ?B 인지 체크 하는 메소드
+    void checkUserNumber(){
+//        세자리가 아닐경우 다시 입력하게 Toast
+        if(numInputEdt.length() !=3){
+            Toast.makeText(mContext, "3자리 숫자를 입력하세요", Toast.LENGTH_SHORT).show();
+        }
+
+//        사용자가 입력한 숫자를 저장할 세칸짜리 배열.
+//        152 => [1],[5],[2]
+        int[] userInputIntArray = new int[3];
+
+//        사용자가 입력한 값을 String으로 따내자.
+        String inputStr = numInputEdt.getText().toString();
+
+//        배열에 각 자리의 숫자를 집어넣기
+//        먼저, String -> 숫자로 변겅. "512" -> 512
+        int inputNumber = Integer.parseInt(inputStr);
+
+//        0번칸 : 맨 앞자리를 대입하는 방법?
+        userInputIntArray[0] = inputNumber / 100;
+
+//        1번칸 : 가운데 자리를 따내는 방법? 512-> 512 % 100 / 10 -> 12 / 10 = > 1
+        userInputIntArray[1] = inputNumber % 100 / 10;
+
+//        2번칸 : 맨 뒷자리를 따내는 방법?
+        userInputIntArray[2] = inputNumber % 10;
+
+//        숫자를 다 집어 넣었으면, 실제로 정답과 비교해서 ?S ?B인지 계산.
+//        ?S ?B저장될 변수
+        int strikeCount = 0;
+        int ballCount = 0;
+
+//        i : 사용자가 입력한 값을 담당하는 index
+        for(int i = 0 ; i<3 ; i++){
+
+//            j : 정답지를 돌아보는 index
+            for(int j=0; j<3; j++){
+
+//                숫자가 같은 것을 발견
+                if (userInputIntArray[i] == questionIntArray[i]){
+
+                    if(i == j){
+//                        위치도 같다! strike 갯수 증가
+                        strikeCount ++;
+                    }
+                    else{
+//                        숫자는 같지만, 위치는 다르다. ball 증가.
+                        ballCount ++;
+                    }
+                }
+            }
+        }
+
+//        임시로 토스트에 S/B 출력
+        String temp = String.format("%d S %d B 입니다",strikeCount, ballCount);
+        Toast.makeText(mContext, temp, Toast.LENGTH_SHORT).show();
     }
 
     @Override
