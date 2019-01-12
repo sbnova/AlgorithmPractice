@@ -69,6 +69,29 @@ public class Question03Activity extends BaseActivity {
         eightBtn.setOnClickListener(guguListener);
         nineBtn.setOnClickListener(guguListener);
 
+        totalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                결과로 가공해서 resultTxt의 재료로 사용.
+                String resultStr = "";
+
+//                2 * 1 = 2 -> 2 / 1 빨리 반복? => 빠른쪽을  안쪽 반복.
+//                2 * 2 = 4
+//                .....
+//                2 * 9 = 18
+//                3 * 1 = 3
+//                .....
+//                9 * 9 = 81
+
+                for(int i = 2; i <=9; i++){
+                    for (int j = 1; j<=9; j++){
+                        resultStr += String.format("%d * %d = %d\n", i , j , i * j);
+                    }
+                }
+
+                resultTxt.setText(resultStr);
+            }
+        });
     }
 
     @Override
